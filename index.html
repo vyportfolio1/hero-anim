@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hero anim</title>
+</head>
+<body>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100%;
+    }
+
+    .wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    #myVideo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    #blackScreen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      background: black;
+      z-index: 2;
+      transition: height 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    }
+
+    #nextScreen {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('/imgs/image 8.jpg') center/cover no-repeat;
+      z-index: 3;
+      transition: top 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #nextScreen img {
+      width: 400px;
+    }
+
+    /* Mobile: 350px */
+    @media (max-width: 450px) {
+      #nextScreen img {
+        width: 150px;
+      }
+    }
+
+    /* Tablet: 789px */
+    @media (min-width: 451px) and (max-width: 1024px) {
+      #nextScreen img {
+        width: 250px;
+      }
+    }
+
+    /* Desktop: 1440px+ */
+    @media (min-width: 1025px) {
+      #nextScreen img {
+        width: 400px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrapper">
+  <video id="myVideo" autoplay muted playsinline>
+    <source src="/imgs/WOLF-Holdings-logo-animation-30052025 (1).mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <div id="blackScreen"></div>
+
+  <div id="nextScreen">
+    <img src="imgs/Group 905.svg" alt="Logo">
+  </div>
+</div>
+
+<script>
+  const video = document.getElementById('myVideo');
+  const blackScreen = document.getElementById('blackScreen');
+  const nextScreen = document.getElementById('nextScreen');
+
+  video.addEventListener('ended', () => {
+    blackScreen.style.height = '100%';
+    setTimeout(() => {
+      nextScreen.style.display = 'flex';
+      requestAnimationFrame(() => {
+        nextScreen.style.top = '0';
+      });
+    }, 1200);
+  });
+</script>
+
+    
+</body>
+</html>
